@@ -4,12 +4,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" src="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 
 <body>
-    <header>123</header>
+    <div class="app-container">
+        <div class="card-wrapper" id="card-overall-expense-el">
+            <p class="card-title">SỐ TIỀN ĐÃ CHI</p>
+            <div class="seperator"></div>
+            <p class="total-expense">7.549.000</p>
+            <div class="progress-bar-container">
+                <div class="bar"></div>
+                <div class="bar-info">
+                    <p>MONTHY BUDGET:</p>
+                    <p>21.000.000</p>
+                </div>
+            </div>
+            <button class="btn" id="btn-add-el">+ THÊM CHI TIÊU</button>
+        </div>
+        <!-- <div class="card-wrapper">
+            <p class="card-title">Chi tiêu hôm nay</p>
+        </div> -->
+        <div class="card-wrapper expense-list-card card-hidden" id="card-add-expense-el">
+            <p class="card-title">Thêm chi tiêu</p>
+            <div class="seperator"></div>
+            <form class="form-wrapper">
+                <div class="input-wrapper">
+                    <label for="expense-amount">Enter amount</label>
+                    <input type="number" id="expense-amount" name="expenseAmount" placeholder="0">
+                </div>
+                <div class="input-wrapper">
+                    <label for="expense-name">Enter name</label>
+                    <input type="text" id="expense-name" name="expenseName" placeholder="e.g, Đặt bàn ăn tối...">
+                </div>
+
+                <fieldset class="category-selector">
+                    <legend class="category-title">Choose category</legend>
+                    <div class="selector-wrapper">
+                        <div class="radio-option">
+                            <input type="radio" class="radio-input" id="food" name="category" value="food" checked>
+                            <label class="radio-label" for="food">🍽️</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" class="radio-input" id="essential" name="category" value="essential">
+                            <label class="radio-label" for="essential">🏠</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" class="radio-input" id="shopping" name="category" value="shopping">
+                            <label class="radio-label" for="shopping">🛍️</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" class="radio-input" id="travel" name="category" value="travel">
+                            <label class="radio-label" for="travel">🚗</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" class="radio-input" id="health" name="category" value="health">
+                            <label class="radio-label" for="health">💊</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" class="radio-input" id="learn" name="category" value="learn">
+                            <label class="radio-label" for="learn">📚</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" class="radio-input" id="invest" name="category" value="invest">
+                            <label class="radio-label" for="invest">📈</label>
+                        </div>
+                    </div>
+
+                </fieldset>
+                <button type="submit" class="btn" id="btn-save-el">LƯU CHI TIÊU</button>
+            </form>
+        </div>
+    </div>
+    <script src="/script.js"></script>
 </body>
 
 </html>
