@@ -10,11 +10,11 @@ const cardAdd = document.getElementById("add-expense-card");
 const cardList = document.getElementById("expenses-list");
 const cardOverall = document.getElementById("overall-expense-card");
 
-btnAdd.addEventListener("click", function () {
-  cardAdd.classList.remove("card-hidden");
-  cardOverall.classList.add("card-hidden");
+btnAdd.addEventListener("click", () => {
+	cardAdd.classList.remove("card-hidden");
+	cardOverall.classList.add("card-hidden");
 });
 
-btnSave.addEventListener("click", function (e) {
-  e.preventDefault();
+btnSave.addEventListener("click", (e) => {
+	e.preventDefault();
 });
