@@ -1,11 +1,16 @@
-//Các element UI
+// Lấy DOM
+
 const btnAdd = document.getElementById("btn-add");
-const btnSave = document.getElementById("btn-save");
-const cardAdd = document.getElementById("add-expense-card");
-const cardOverall = document.getElementById("overall-expense-card");
-const cardList = document.getElementById("expenses-list");
-const expenseForm = document.getElementById("expense-form");
-const allExpenses = [];
+const summaryCard = document.getElementById("overall-expense-card");
+const addExpenseCard = document.getElementById("add-expense-card");
+const formExpense = document.getElementById("expense-form");
+const expenseListContainer = document.getElementById("expenses-list");
+const closeAddCard = document.getElementById("close-card-add-btn");
+
+// Báo danh sách chi tiêu
+let expenses = [];
+
+// Map emoji vào category
 const categoryEmojis = {
 	food: "🍽️",
 	essential: "🏠",
@@ -16,57 +21,58 @@ const categoryEmojis = {
 	invest: "📈",
 };
 
-//Render card tạo chi tiêu khi bấm btn " Thêm chi tiêu "
+// Render cardAdd khi bấm thêm chi tiêu btn
 btnAdd.addEventListener("click", () => {
-	cardAdd.classList.remove("card-hidden");
-	cardOverall.classList.add("card-hidden");
+	summaryCard.classList.add("card-hidden");
+	addExpenseCard.classList.remove("card-hidden");
 });
 
-//Lấy value từ user và tạo object
-
-function getExpenseData() {
-	const name = document.getElementById("expense-name");
-	const amount = document.getElementById("expense-amount");
-	const category = document.querySelector('input[name="category"]:checked');
+//Thu thập dữ liệ từ input user và tạo object
+function collectExpenseFormData() {
+	const nameInput = document.getElementById("expense-name");
+	const amountInput = document.getElementById("expense-amount");
+	const categoryInput = document.querySelector(
+		"input[name='category']:checked",
+	);
 
 	return {
-		name: name.value,
-		amount: amount.value,
-		category: category.value,
+		name: nameInput.value,
+		amount: parseFloat(amountInput.value),
+		category: categoryInput.value,
 	};
 }
 
-//Validate input trước khi Lưu
-function validateForm(expenseItem) {
-	if (expenseItem.name === "" || expenseItem.amount === "") {
-		alert("Vui lòng nhập tên chi tiêu");
-		return false;
-	}
-	return true;
+//Đẩy data vào list
+function addExpensetoList() {
+	const expenseItem = collectExpenseFormData();
+	expenses.push(expenseItem);
 }
 
-//Render value ra 1 list item khi bấm add
-function renderExpenseList(validatedExpenseItem) {
-	allExpenses.push(validatedExpenseItem); // Đẩy item vào danh sách expense
-	let expenseListHTML = ""; // Tạo biến hold content được render
-
-	for (let i = 0; i < allExpenses.length; i++) {
-		expenseListHTML += `<li class="expense-item">
-								<div class ="expense-info">
-									<div class="expense-category">${categoryEmojis[allExpenses[i].category]}</div>
-									<div class="expense-name">${allExpenses[i].name}</div>
-								</div>
-								<div>${new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(allExpenses[i].amount)}</div>
-							</li>`;
+//Render ra danh sách item
+function renderExpenseList() {
+	let expenseItemsMarkup = "";
+	for (let i = 0; i < expenses.length; i++) {
+		expenseItemsMarkup += `<li class="expense-item">
+                                <div class ="expense-info">
+                                    <div class="expense-category">${categoryEmojis[expenses[i].category]}</div>
+                                    <div class="expense-name">${expenses[i].name}</div>
+                                </div>
+                                <div>${new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(expenses[i].amount)}</div>
+                            </li>`;
 	}
-	cardList.innerHTML = expenseListHTML; // Gắn innerHTML của ul = content redner
+	expenseListContainer.innerHTML = expenseItemsMarkup;
 }
 
-expenseForm.addEventListener("submit", (e) => {
+// Render list chi tiêu khi submit form chi tiêu
+formExpense.addEventListener("submit", (e) => {
 	e.preventDefault();
-	const expenseItem = getExpenseData();
-	if (validateForm(expenseItem)) {
-		renderExpenseList(expenseItem);
-	}
-	expenseForm.reset();
+	addExpensetoList();
+	renderExpenseList();
+	formExpense.reset();
+});
+
+// Đóng card Add khi bấm button close
+closeAddCard.addEventListener("click", () => {
+	summaryCard.classList.remove("card-hidden");
+	addExpenseCard.classList.add("card-hidden");
 });

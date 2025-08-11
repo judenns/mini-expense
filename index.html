@@ -9,7 +9,10 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
     <title>Document</title>
 </head>
 
@@ -28,7 +31,7 @@
             </div>
             <button class="btn" id="btn-add">+ THÊM CHI TIÊU</button>
         </div>
-        <div class="card-wrapper card-hidden" id="add-expense-card">
+        <div class="card-wrapper card-add-expense card-hidden" id="add-expense-card">
             <p class="card-title">Thêm chi tiêu</p>
             <div class="seperator"></div>
             <form class="form-wrapper" id="expense-form">
@@ -78,6 +81,7 @@
                 </fieldset>
                 <button type="submit" class="btn" id="btn-save">LƯU CHI TIÊU</button>
             </form>
+            <i class="ph ph-x close-btn" id="close-card-add-btn"></i>
         </div>
         <div class="card-wrapper">
             <p class="card-title">Chi tiêu hôm nay</p>
