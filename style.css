@@ -181,7 +181,6 @@
 
         .radio-label {
             display: block;
-            font-size: 20px;
             padding: 12px;
             border-radius: 8px;
             cursor: pointer;
@@ -189,6 +188,13 @@
             &:hover {
                 background-color: var(--color-bg-default);
             }
+        }
+
+        .radio-label,
+        .emoji {
+            font-size: 20px;
+            display: block;
+
         }
 
         .radio-input {
@@ -209,6 +215,18 @@
             }
         }
     }
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
 
