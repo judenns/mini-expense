@@ -1,17 +1,20 @@
-// Process
-// 1. Render state ban đầu
-// 2. Lấy value từ user
-// 3. Render value ra 1 list item trong Card List
-// 4. Tính tổng
-// 5. Render tổng ra Card Overall
-// 6. Update thanh budget
-
 //Các element UI
 const btnAdd = document.getElementById("btn-add");
 const btnSave = document.getElementById("btn-save");
 const cardAdd = document.getElementById("add-expense-card");
 const cardOverall = document.getElementById("overall-expense-card");
-let allExpenses = [];
+const cardList = document.getElementById("expenses-list");
+const expenseForm = document.getElementById("expense-form");
+const allExpenses = [];
+const categoryEmojis = {
+	food: "🍽️",
+	essential: "🏠",
+	shopping: "🛍️",
+	travel: "🚗",
+	health: "💊",
+	learn: "📚",
+	invest: "📈",
+};
 
 //Render card tạo chi tiêu khi bấm btn " Thêm chi tiêu "
 btnAdd.addEventListener("click", () => {
@@ -19,12 +22,7 @@ btnAdd.addEventListener("click", () => {
 	cardOverall.classList.add("card-hidden");
 });
 
-//Prevent form submit gây back lại card Overall
-btnSave.addEventListener("click", (e) => {
-	e.preventDefault();
-});
-
-//Lấy value từ user và tạo object khi cần
+//Lấy value từ user và tạo object
 
 function getExpenseData() {
 	const name = document.getElementById("expense-name");
@@ -38,24 +36,37 @@ function getExpenseData() {
 	};
 }
 
-//Render value ra 1 list item khi bấm add
+//Validate input trước khi Lưu
+function validateForm(expenseItem) {
+	if (expenseItem.name === "" || expenseItem.amount === "") {
+		alert("Vui lòng nhập tên chi tiêu");
+		return false;
+	}
+	return true;
+}
 
-btnSave.addEventListener("click", () => {
-	const cardList = document.getElementById("expenses-list"); // Lấy DOM danh sách list
-	const expenseItem = getExpenseData(); // Tạo biến chi tiêu lấy giá trị bằng input user
-	allExpenses.push(expenseItem); // Đẩy item vào danh sách expense
+//Render value ra 1 list item khi bấm add
+function renderExpenseList(validatedExpenseItem) {
+	allExpenses.push(validatedExpenseItem); // Đẩy item vào danh sách expense
 	let expenseListHTML = ""; // Tạo biến hold content được render
 
 	for (let i = 0; i < allExpenses.length; i++) {
-		expenseListHTML += `<li class="">
+		expenseListHTML += `<li class="expense-item">
 								<div class ="expense-info">
-									<div class="expense-category">${allExpenses[i].category}</div>
-									<div>${allExpenses[i].name}</div>
+									<div class="expense-category">${categoryEmojis[allExpenses[i].category]}</div>
+									<div class="expense-name">${allExpenses[i].name}</div>
 								</div>
-								<div>${allExpenses[i].amount}</div>
+								<div>${new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(allExpenses[i].amount)}</div>
 							</li>`;
 	}
 	cardList.innerHTML = expenseListHTML; // Gắn innerHTML của ul = content redner
-});
+}
 
-// Lưu vào localstorage
+expenseForm.addEventListener("submit", (e) => {
+	e.preventDefault();
+	const expenseItem = getExpenseData();
+	if (validateForm(expenseItem)) {
+		renderExpenseList(expenseItem);
+	}
+	expenseForm.reset();
+});

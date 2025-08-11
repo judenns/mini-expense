@@ -31,14 +31,15 @@
         <div class="card-wrapper card-hidden" id="add-expense-card">
             <p class="card-title">Thêm chi tiêu</p>
             <div class="seperator"></div>
-            <form class="form-wrapper">
+            <form class="form-wrapper" id="expense-form">
                 <div class="input-wrapper">
                     <label for="expense-amount">Enter amount</label>
-                    <input type="number" id="expense-amount" name="expenseAmount" placeholder="0">
+                    <input type="number" id="expense-amount" name="expenseAmount" placeholder="0" required>
                 </div>
                 <div class="input-wrapper">
                     <label for="expense-name">Enter name</label>
-                    <input type="text" id="expense-name" name="expenseName" placeholder="e.g, Đặt bàn ăn tối...">
+                    <input type="text" id="expense-name" name="expenseName" placeholder="e.g, Đặt bàn ăn tối..."
+                        required>
                 </div>
 
                 <fieldset class="category-selector">
@@ -80,7 +81,7 @@
         </div>
         <div class="card-wrapper">
             <p class="card-title">Chi tiêu hôm nay</p>
-            <ul id="expenses-list"></ul>
+            <ul class="expenses-list" id="expenses-list"></ul>
         </div>
     </div>
     <script src="/script.js"></script>
