@@ -7,7 +7,7 @@
     padding-top: 40px;
 }
 
-.card-wrapper {
+.card {
     position: relative;
     padding: 20px;
     gap: 20px;
@@ -30,11 +30,6 @@
     }
 }
 
-.seperator {
-    width: 100%;
-    border: 1px solid var(--color-border-default);
-}
-
 .card-wrapper::before {
     content: "";
     position: absolute;
@@ -48,7 +43,12 @@
     backdrop-filter: blur(6px);
 }
 
-.total-expense {
+.seperator {
+    width: 100%;
+    border: 1px solid var(--color-border-default);
+}
+
+.total-expense-title {
     font-family: "Instrument Serif", serif;
     font-size: var(--font-size-display);
     color: var(--color-brand);

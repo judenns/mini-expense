@@ -1,5 +1,4 @@
 // Lấy DOM
-
 const btnAdd = document.getElementById("btn-add");
 const summaryCard = document.getElementById("overall-expense-card");
 const addExpenseCard = document.getElementById("add-expense-card");
@@ -8,7 +7,7 @@ const expenseListContainer = document.getElementById("expenses-list");
 const closeAddCard = document.getElementById("close-card-add-btn");
 
 // Báo danh sách chi tiêu
-let expenses = [];
+const expenses = [];
 
 // Map emoji vào category
 const categoryEmojis = {
