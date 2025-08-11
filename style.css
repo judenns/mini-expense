@@ -300,3 +300,22 @@ a {
 .card-visible {
     display: flex;
 }
+
+.expense-item {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: var(--font-size-default);
+    color: var(--color-text-default);
+
+    .expense-info {
+        gap: 4px;
+
+        .expense-category {
+            width: 32px;
+            height: 32px;
+            border-radius: 99px;
+        }
+    }
+}
