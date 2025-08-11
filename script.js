@@ -20,13 +20,18 @@ const categoryEmojis = {
 	invest: "📈",
 };
 
-// Render cardAdd khi bấm thêm chi tiêu btn
-btnAdd.addEventListener("click", () => {
-	summaryCard.classList.add("card-hidden");
-	addExpenseCard.classList.remove("card-hidden");
-});
+//Đơn vị tiền tệ
+function currencyFormat(style, currency) {
+	return {
+		style: style,
+		currency: currency,
+	};
+}
 
-//Thu thập dữ liệ từ input user và tạo object
+const currencyOption = currencyFormat("currency", "USD");
+const currencySetting = new Intl.NumberFormat("en-IN", currencyOption);
+
+//Thu thập dữ liệu từ input user và tạo object
 function collectExpenseFormData() {
 	const nameInput = document.getElementById("expense-name");
 	const amountInput = document.getElementById("expense-amount");
@@ -42,7 +47,7 @@ function collectExpenseFormData() {
 }
 
 //Đẩy data vào list
-function addExpensetoList() {
+function addExpenseToList() {
 	const expenseItem = collectExpenseFormData();
 	expenses.push(expenseItem);
 }
@@ -56,7 +61,7 @@ function renderExpenseList() {
                                     <div class="expense-category">${categoryEmojis[expenses[i].category]}</div>
                                     <div class="expense-name">${expenses[i].name}</div>
                                 </div>
-                                <div>${new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(expenses[i].amount)}</div>
+                                <div>${currencySetting.format(expenses[i].amount)}</div>
                             </li>`;
 	}
 	expenseListContainer.innerHTML = expenseItemsMarkup;
@@ -65,13 +70,21 @@ function renderExpenseList() {
 // Render list chi tiêu khi submit form chi tiêu
 formExpense.addEventListener("submit", (e) => {
 	e.preventDefault();
-	addExpensetoList();
+	addExpenseToList();
 	renderExpenseList();
 	formExpense.reset();
 });
 
-// Đóng card Add khi bấm button close
+//Toggle Card
+function toggleCard(hideCard, showCard) {
+	hideCard.classList.add("card-hidden");
+	showCard.classList.remove("card-hidden");
+}
+
+btnAdd.addEventListener("click", () => {
+	toggleCard(summaryCard, addExpenseCard);
+});
+
 closeAddCard.addEventListener("click", () => {
-	summaryCard.classList.remove("card-hidden");
-	addExpenseCard.classList.add("card-hidden");
+	toggleCard(addExpenseCard, summaryCard);
 });
