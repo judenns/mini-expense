@@ -4,6 +4,7 @@ const summaryCard = document.getElementById("overall-expense-card");
 const addExpenseCard = document.getElementById("add-expense-card");
 const formExpense = document.getElementById("expense-form");
 const expenseListContainer = document.getElementById("expenses-list");
+const totalExpenseTitle = document.getElementById("total-expense");
 const closeAddCard = document.getElementById("close-card-add-btn");
 
 // Báo danh sách chi tiêu
@@ -67,15 +68,28 @@ function renderExpenseList() {
 	expenseListContainer.innerHTML = expenseItemsMarkup;
 }
 
+//Tính tổng chi tiêu
+function calculateTotalExpense() {
+	return expenses.reduce((acc, item) => acc + item.amount, 0);
+}
+
+//Render tổng chi tiêu
+function renderTotalExpense() {
+	const totalExpense = calculateTotalExpense();
+	totalExpenseTitle.textContent = `${totalExpense}`;
+}
+
 // Render list chi tiêu khi submit form chi tiêu
 formExpense.addEventListener("submit", (e) => {
 	e.preventDefault();
 	addExpenseToList();
+	calculateTotalExpense();
 	renderExpenseList();
+	renderTotalExpense();
 	formExpense.reset();
 });
 
-//Toggle Card
+//Toggle Cards
 function toggleCard(hideCard, showCard) {
 	hideCard.classList.add("card-hidden");
 	showCard.classList.remove("card-hidden");
