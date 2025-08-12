@@ -104,11 +104,7 @@ function toggleCard(hideCard, showCard) {
 }
 
 // Rebder Card Add, ẩn card overall
-btnAdd.addEventListener("click", async () => {
-	if (summaryCard) {
-		await animateExpenseCardOut(summaryCard);
-	}
-
+btnAdd.addEventListener("click", () => {
 	toggleCard(summaryCard, addExpenseCard);
 });
 
