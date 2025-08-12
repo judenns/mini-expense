@@ -1,10 +1,13 @@
 // Lấy DOM
+// Lấy DOM
 const btnAdd = document.getElementById("btn-add");
 const summaryCard = document.getElementById("overall-expense-card");
 const addExpenseCard = document.getElementById("add-expense-card");
 const formExpense = document.getElementById("expense-form");
+const formExpense = document.getElementById("expense-form");
 const expenseListContainer = document.getElementById("expenses-list");
 const totalExpenseTitle = document.getElementById("total-expense");
+const closeAddCard = document.getElementById("close-card-add-btn");
 const closeAddCard = document.getElementById("close-card-add-btn");
 const nameInput = document.getElementById("expense-name");
 const amountInput = document.getElementById("expense-amount");
@@ -27,6 +30,7 @@ const categoryEmojis = {
 };
 
 //Đơn vị tiền tệ
+//Đơn vị tiền tệ
 function currencyFormat(currency) {
 	return {
 		style: "currency",
@@ -36,6 +40,8 @@ function currencyFormat(currency) {
 
 const currencyOption = currencyFormat(currentCurrency);
 const currencySetting = new Intl.NumberFormat(currentLocale, currencyOption);
+
+//Chuyển từ số sang đơn vị tiền tệ?
 
 //Chuyển từ số sang đơn vị tiền tệ?
 
@@ -76,6 +82,8 @@ function calculateTotalExpense() {
 
 //Biến nub
 
+//Biến nub
+
 //Render tổng chi tiêu
 function renderTotalExpense() {
 	const totalExpense = calculateTotalExpense();
@@ -87,6 +95,15 @@ function updateExpenseDisplay() {
 	renderExpenseList();
 	renderTotalExpense();
 }
+
+// Render list chi tiêu khi submit form chi tiêu
+formExpense.addEventListener("submit", (e) => {
+	e.preventDefault();
+	addExpenseToList();
+	calculateTotalExpense();
+	updateExpenseDisplay();
+	formExpense.reset();
+});
 
 // Render list chi tiêu khi submit form chi tiêu
 formExpense.addEventListener("submit", (e) => {
