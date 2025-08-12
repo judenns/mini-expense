@@ -6,9 +6,6 @@ const formExpense = document.getElementById("expense-form");
 const expenseListContainer = document.getElementById("expenses-list");
 const totalExpenseTitle = document.getElementById("total-expense");
 const closeAddCard = document.getElementById("close-card-add-btn");
-const nameInput = document.getElementById("expense-name");
-const amountInput = document.getElementById("expense-amount");
-const categoryInput = document.querySelector("input[name='category']:checked");
 const currentCurrency = "VND";
 const currentLocale = "vi-VN";
 
@@ -41,6 +38,11 @@ const currencySetting = new Intl.NumberFormat(currentLocale, currencyOption);
 
 //Thu thập dữ liệu từ input user và tạo object
 function collectExpenseFormData() {
+	const nameInput = document.getElementById("expense-name");
+	const amountInput = document.getElementById("expense-amount");
+	const categoryInput = document.querySelector(
+		"input[name='category']:checked",
+	);
 	return {
 		name: nameInput.value,
 		amount: parseFloat(amountInput.value),
