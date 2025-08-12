@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "@biomejs/biome": "2.1.4"
+  },
+  "dependencies": {
+    "motion": "^12.23.12"
   }
 }

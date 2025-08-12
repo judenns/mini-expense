@@ -1,4 +1,5 @@
 // Lấy DOM buttons
+import { animateExpenseCardOut } from "./anim.js";
 const closeAddCard = document.getElementById("close-card-add-btn");
 const btnAdd = document.getElementById("btn-add");
 
@@ -19,7 +20,7 @@ const currentCurrency = "VND";
 const currentLocale = "vi-VN";
 
 // Config budget hằng tháng
-let monthyBudget = 20000000;
+// let monthyBudget = 20000000;
 
 // Báo danh sách chi tiêu
 const expenses = [];
@@ -86,22 +87,28 @@ function renderTotalExpense() {
 	totalExpenseTitle.textContent = `${currencySetting.format(totalExpense)}`;
 }
 
-//Render UI
+//Update UI
 function updateExpenseDisplay() {
 	renderExpenseList();
 	renderTotalExpense();
 }
 
-//Toggle Cards
+//Toggle Cards sử dụng parameter và agurment
 function toggleCard(hideCard, showCard) {
 	hideCard.classList.add("card-hidden");
 	showCard.classList.remove("card-hidden");
 }
 
-btnAdd.addEventListener("click", () => {
+// Rebder Card Add, ẩn card overall
+btnAdd.addEventListener("click", async () => {
+	if (summaryCard) {
+		await animateExpenseCardOut(summaryCard);
+	}
+
 	toggleCard(summaryCard, addExpenseCard);
 });
 
+// Back khỏi Card Add
 closeAddCard.addEventListener("click", () => {
 	toggleCard(addExpenseCard, summaryCard);
 });
@@ -109,8 +116,8 @@ closeAddCard.addEventListener("click", () => {
 // Update UI khi submit form thêm chi tiêu nhưng không thoát khỏi form
 formExpense.addEventListener("submit", (e) => {
 	e.preventDefault();
-	addExpenseToList();
-	calculateTotalExpense();
-	updateExpenseDisplay();
-	formExpense.reset();
+	addExpenseToList(); // Thêm expense vào list card
+	calculateTotalExpense(); // Tính tổng các chi tiêu
+	updateExpenseDisplay(); // Update giao diện
+	formExpense.reset(); // Reset input trên card Add
 });
