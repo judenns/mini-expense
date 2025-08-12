@@ -6,6 +6,11 @@ const formExpense = document.getElementById("expense-form");
 const expenseListContainer = document.getElementById("expenses-list");
 const totalExpenseTitle = document.getElementById("total-expense");
 const closeAddCard = document.getElementById("close-card-add-btn");
+const nameInput = document.getElementById("expense-name");
+const amountInput = document.getElementById("expense-amount");
+const categoryInput = document.querySelector("input[name='category']:checked");
+const currentCurrency = "VND";
+const currentLocale = "vi-VN";
 
 // Báo danh sách chi tiêu
 const expenses = [];
@@ -22,24 +27,20 @@ const categoryEmojis = {
 };
 
 //Đơn vị tiền tệ
-function currencyFormat(style, currency) {
+function currencyFormat(currency) {
 	return {
-		style: style,
+		style: "currency",
 		currency: currency,
 	};
 }
 
-const currencyOption = currencyFormat("currency", "USD");
-const currencySetting = new Intl.NumberFormat("en-IN", currencyOption);
+const currencyOption = currencyFormat(currentCurrency);
+const currencySetting = new Intl.NumberFormat(currentLocale, currencyOption);
+
+//Chuyển từ số sang đơn vị tiền tệ?
 
 //Thu thập dữ liệu từ input user và tạo object
 function collectExpenseFormData() {
-	const nameInput = document.getElementById("expense-name");
-	const amountInput = document.getElementById("expense-amount");
-	const categoryInput = document.querySelector(
-		"input[name='category']:checked",
-	);
-
 	return {
 		name: nameInput.value,
 		amount: parseFloat(amountInput.value),
@@ -73,10 +74,12 @@ function calculateTotalExpense() {
 	return expenses.reduce((acc, item) => acc + item.amount, 0);
 }
 
+//Biến nub
+
 //Render tổng chi tiêu
 function renderTotalExpense() {
 	const totalExpense = calculateTotalExpense();
-	totalExpenseTitle.textContent = `${totalExpense}`;
+	totalExpenseTitle.textContent = `${currencySetting.format(totalExpense)}`;
 }
 
 //Render UI

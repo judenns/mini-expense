@@ -37,7 +37,8 @@
             <form class="form-wrapper" id="expense-form">
                 <div class="input-wrapper">
                     <label for="expense-amount">Enter amount</label>
-                    <input type="number" id="expense-amount" name="expenseAmount" placeholder="0" required>
+                    <input type="number" id="expense-amount" name="expenseAmount" min="1000" step="1000"
+                        max="999000000000" placeholder="0 ₫" required>
                 </div>
                 <div class="input-wrapper">
                     <label for="expense-name">Enter name</label>
