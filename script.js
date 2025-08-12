@@ -53,7 +53,7 @@ function addExpenseToList() {
 	expenses.push(expenseItem);
 }
 
-//Render ra danh sách item
+//Render ra danh sách item ở card danh sách chi tiêu
 function renderExpenseList() {
 	let expenseItemsMarkup = "";
 	for (let i = 0; i < expenses.length; i++) {
@@ -79,13 +79,18 @@ function renderTotalExpense() {
 	totalExpenseTitle.textContent = `${totalExpense}`;
 }
 
+//Render UI
+function updateExpenseDisplay() {
+	renderExpenseList();
+	renderTotalExpense();
+}
+
 // Render list chi tiêu khi submit form chi tiêu
 formExpense.addEventListener("submit", (e) => {
 	e.preventDefault();
 	addExpenseToList();
 	calculateTotalExpense();
-	renderExpenseList();
-	renderTotalExpense();
+	updateExpenseDisplay();
 	formExpense.reset();
 });
 
