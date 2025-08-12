@@ -1,16 +1,25 @@
-// Lấy DOM
+// Lấy DOM buttons
+const closeAddCard = document.getElementById("close-card-add-btn");
 const btnAdd = document.getElementById("btn-add");
+
+// Lấy DOM UI Card
 const summaryCard = document.getElementById("overall-expense-card");
 const addExpenseCard = document.getElementById("add-expense-card");
-const formExpense = document.getElementById("expense-form");
 const expenseListContainer = document.getElementById("expenses-list");
 const totalExpenseTitle = document.getElementById("total-expense");
-const closeAddCard = document.getElementById("close-card-add-btn");
+
+// Lấy DOM form
+const formExpense = document.getElementById("expense-form");
 const nameInput = document.getElementById("expense-name");
 const amountInput = document.getElementById("expense-amount");
 const categoryInput = document.querySelector("input[name='category']:checked");
+
+// Config tiền tệ
 const currentCurrency = "VND";
 const currentLocale = "vi-VN";
+
+// Config budget hằng tháng
+let monthyBudget = 20000000;
 
 // Báo danh sách chi tiêu
 const expenses = [];
@@ -26,18 +35,15 @@ const categoryEmojis = {
 	invest: "📈",
 };
 
-//Đơn vị tiền tệ
+//Format Đơn vị tiền tệ
 function currencyFormat(currency) {
 	return {
 		style: "currency",
 		currency: currency,
 	};
 }
-
 const currencyOption = currencyFormat(currentCurrency);
 const currencySetting = new Intl.NumberFormat(currentLocale, currencyOption);
-
-//Chuyển từ số sang đơn vị tiền tệ?
 
 //Thu thập dữ liệu từ input user và tạo object
 function collectExpenseFormData() {
@@ -74,8 +80,6 @@ function calculateTotalExpense() {
 	return expenses.reduce((acc, item) => acc + item.amount, 0);
 }
 
-//Biến nub
-
 //Render tổng chi tiêu
 function renderTotalExpense() {
 	const totalExpense = calculateTotalExpense();
@@ -87,15 +91,6 @@ function updateExpenseDisplay() {
 	renderExpenseList();
 	renderTotalExpense();
 }
-
-// Render list chi tiêu khi submit form chi tiêu
-formExpense.addEventListener("submit", (e) => {
-	e.preventDefault();
-	addExpenseToList();
-	calculateTotalExpense();
-	updateExpenseDisplay();
-	formExpense.reset();
-});
 
 //Toggle Cards
 function toggleCard(hideCard, showCard) {
@@ -109,4 +104,13 @@ btnAdd.addEventListener("click", () => {
 
 closeAddCard.addEventListener("click", () => {
 	toggleCard(addExpenseCard, summaryCard);
+});
+
+// Update UI khi submit form thêm chi tiêu nhưng không thoát khỏi form
+formExpense.addEventListener("submit", (e) => {
+	e.preventDefault();
+	addExpenseToList();
+	calculateTotalExpense();
+	updateExpenseDisplay();
+	formExpense.reset();
 });
