@@ -76,9 +76,20 @@
 
     .bar {
         height: 8px;
+        position: relative;
         background: var(--color-border-default);
         border-radius: 999px;
+        overflow: hidden;
+
+        .bar-display {
+            position: absolute;
+            width: 800%;
+            height: 8px;
+            background-color: var(--color-bg-brand);
+            z-index: 3;
+        }
     }
+
 
     .bar-info {
         display: flex;

@@ -25,7 +25,6 @@ const addExpenseCard = document.getElementById("add-expense-card");
 const formExpense = document.getElementById("expense-form");
 const expenseListContainer = document.getElementById("expenses-list");
 const totalExpenseTitle = document.getElementById("total-expense");
-const progressBar = document.getElementById("progress-bar");
 
 // Báo danh sách chi tiêu
 const expenses = [];
@@ -43,9 +42,9 @@ const currencySetting = new Intl.NumberFormat(currentLocale, currencyOption);
 
 // Thu thập dữ liệu từ from -> Trả về object
 function collectExpenseFormData() {
-	const nameInput = document.getElementById("expense-name");
-	const amountInput = document.getElementById("expense-amount");
-	const categoryInput = document.querySelector(
+	const nameInput = formExpense.querySelector("input[name='expenseName']");
+	const amountInput = formExpense.querySelector("input[name='expenseAmount']");
+	const categoryInput = formExpense.querySelector(
 		"input[name='category']:checked",
 	);
 	return {
@@ -119,3 +118,9 @@ closeAddCard.addEventListener("click", () => {
 });
 
 //Update thanh progress
+let progressBar = document.querySelector(".bar");
+let monthlyBudget = 20000000;
+let progressBarWidth = 100 / monthlyBudget;
+console.log(progressBarWidth);
+
+progressBar.innerHTML = `<div class="bar-display"></div>`;
