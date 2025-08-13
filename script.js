@@ -1,6 +1,7 @@
 // CONFIG
 const currentCurrency = "VND";
 const currentLocale = "vi-VN";
+let monthlyBudget = 20000000;
 
 // Map emoji vào category
 const categoryEmojis = {
@@ -80,6 +81,13 @@ function calculateTotalExpense() {
 	return expenses.reduce((acc, item) => acc + item.amount, 0);
 }
 
+//Update thanh progress
+function updateProgressbar() {
+	let progressBar = document.querySelector(".bar-display");
+	let percentage = (calculateTotalExpense() / monthlyBudget) * 100;
+	progressBar.style.width = `${percentage}%`;
+}
+
 // Render tổng chi tiêu
 function renderTotalExpense() {
 	const totalExpense = calculateTotalExpense();
@@ -90,6 +98,7 @@ function renderTotalExpense() {
 function updateExpenseDisplay() {
 	renderExpenseList();
 	renderTotalExpense();
+	updateProgressbar();
 }
 
 // Render list chi tiêu khi submit form chi tiêu
@@ -116,11 +125,3 @@ btnAdd.addEventListener("click", () => {
 closeAddCard.addEventListener("click", () => {
 	toggleCard(addExpenseCard, summaryCard);
 });
-
-//Update thanh progress
-let progressBar = document.querySelector(".bar");
-let monthlyBudget = 20000000;
-let progressBarWidth = 100 / monthlyBudget;
-console.log(progressBarWidth);
-
-progressBar.innerHTML = `<div class="bar-display"></div>`;
