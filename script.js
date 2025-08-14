@@ -83,8 +83,8 @@ function calculateTotalExpense() {
 
 //Update thanh progress
 function updateProgressbar() {
-	let progressBar = document.querySelector(".bar-display");
-	let percentage = (calculateTotalExpense() / monthlyBudget) * 100;
+	const progressBar = document.querySelector(".bar-display");
+	const percentage = (calculateTotalExpense() / monthlyBudget) * 100;
 	progressBar.style.width = `${percentage}%`;
 }
 
