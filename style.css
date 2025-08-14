@@ -1,3 +1,8 @@
+body {
+    background: no-repeat url("/imgs/bg-optimize.webp");
+    background-size: cover;
+}
+
 .app-container {
     display: flex;
     flex-direction: column;
@@ -217,11 +222,12 @@
 
             &:checked+.radio-label {
                 background-color: var(--color-bg-default);
-                outline: 1.5px solid #dcf2cb;
+                outline: 2px solid var(--color-bg-brand-light);
+                outline-offset: 2px;
             }
 
             &:focus+.radio-label {
-                outline: 2px solid #dcf2cb;
+                outline: 2px solid var(--color-bg-brand);
                 outline-offset: 2px;
             }
         }

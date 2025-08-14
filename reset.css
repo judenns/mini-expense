@@ -36,8 +36,6 @@ body {
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     font-optical-sizing: auto;
-    background: no-repeat url("/imgs/output_bg.webp");
-    background-size: cover;
 }
 
 /* Remove list styles */
